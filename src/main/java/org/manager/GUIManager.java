@@ -41,7 +41,6 @@ public class GUIManager<E extends Enum<E>, L extends Enum<L>> {
     }
 
     private void openForPlayer(Player player, AbstractGUI<?> gui) {
-        player.sendMessage("あうあうああふぁｄふぁｄふぁｄふぁｄふぁ");
         if (gui != null) {
             var guiData = TacoRaceLibrary.getInstance().getOpenGUIs();
 

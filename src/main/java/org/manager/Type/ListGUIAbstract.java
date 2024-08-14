@@ -6,15 +6,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.manager.GUIListener;
-import org.manager.GUIManager;
+import org.jetbrains.annotations.NotNull;
 import org.manager.RunnableSystem;
 import org.manager.TacoRaceLibrary;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.bukkit.Bukkit.getLogger;
 import static org.manager.UtilityClass.getItem;
 import static org.manager.UtilityClass.toColor;
 
@@ -31,6 +28,7 @@ public abstract class ListGUIAbstract<L extends Enum<L>> extends AbstractGUI<L> 
     public abstract String guiName();
     public abstract List<ItemStack> listItems();
 
+    @NotNull
     public abstract ItemStack setCenterInteractButton();
     public abstract RunnableSystem.InventoryRunnable whenClickListContent();
     public abstract RunnableSystem.InventoryRunnable whenClickListBack();
@@ -43,6 +41,19 @@ public abstract class ListGUIAbstract<L extends Enum<L>> extends AbstractGUI<L> 
         Inventory inventory = Bukkit.createInventory(null, GUI_SIZE, toColor(guiName()));
 
         var items = listItems();
+
+        //----------下の操作バー----------
+        for(int i=START_BAR_INDEX;i < GUI_SIZE;i++) {
+            if(CLICK_CENTER == i && whenClickListCenterInteract() != null) {
+                inventory.setItem(i, setCenterInteractButton());
+                continue;
+            }
+            if(CLICK_BACK == i && whenClickListBack() != null ) {
+                inventory.setItem(i, getItem(Material.FEATHER, "&c&l戻る"));
+                continue;
+            }
+            inventory.setItem(i, getItem(Material.BLACK_STAINED_GLASS_PANE, " "));
+        }
         if(items == null) return inventory;
 
         if(items.size() > START_BAR_INDEX) {

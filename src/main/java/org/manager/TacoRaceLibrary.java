@@ -1,7 +1,9 @@
 package org.manager;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.manager.Type.AbstractGUI;
 import org.manager.Type.ListGUIAbstract;
 
@@ -9,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TacoRaceLibrary {
+public class TacoRaceLibrary extends JavaPlugin {
     private static final TacoRaceLibrary INSTANCE = new TacoRaceLibrary();
 
     public static TacoRaceLibrary getInstance() {
@@ -17,6 +19,11 @@ public class TacoRaceLibrary {
     }
 
     private TacoRaceLibrary() {
+    }
+
+    @Override
+    public void onDisable() {
+        HandlerList.unregisterAll();
     }
 
     //OpenGUIData

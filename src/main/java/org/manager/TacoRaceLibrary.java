@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TacoRaceLibrary extends JavaPlugin {
+public class TacoRaceLibrary {
     private static final TacoRaceLibrary INSTANCE = new TacoRaceLibrary();
 
     public static TacoRaceLibrary getInstance() {
@@ -19,11 +19,6 @@ public class TacoRaceLibrary extends JavaPlugin {
     }
 
     private TacoRaceLibrary() {
-    }
-
-    @Override
-    public void onDisable() {
-        HandlerList.unregisterAll();
     }
 
     //OpenGUIData
